@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Devil7.Automation.Updater", "Github Releases Updater\Devil7.Automation.Updater.vbproj", "{96513FB2-5408-484A-88EA-2721C2F33950}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Devil7.Automation.Updater.Test", "Devil7.Automation.Updater.Test\Devil7.Automation.Updater.Test.vbproj", "{A1DE8147-09BC-4D8F-B2C1-96381D882C34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96513FB2-5408-484A-88EA-2721C2F33950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96513FB2-5408-484A-88EA-2721C2F33950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96513FB2-5408-484A-88EA-2721C2F33950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96513FB2-5408-484A-88EA-2721C2F33950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1DE8147-09BC-4D8F-B2C1-96381D882C34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1DE8147-09BC-4D8F-B2C1-96381D882C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1DE8147-09BC-4D8F-B2C1-96381D882C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1DE8147-09BC-4D8F-B2C1-96381D882C34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD4C819F-1177-482E-A9D7-E6DA1C9F05EF}
+	EndGlobalSection
+EndGlobal
