@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Devil7.Automation.Updater", "Github Releases Updater\Devil7.Automation.Updater.vbproj", "{96513FB2-5408-484A-88EA-2721C2F33950}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Devil7.Automation.Updater", "Devil7.Automation.Updater\Devil7.Automation.Updater.vbproj", "{96513FB2-5408-484A-88EA-2721C2F33950}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Devil7.Automation.Updater.Test", "Devil7.Automation.Updater.Test\Devil7.Automation.Updater.Test.vbproj", "{A1DE8147-09BC-4D8F-B2C1-96381D882C34}"
 EndProject
