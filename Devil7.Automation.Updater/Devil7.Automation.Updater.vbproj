@@ -62,6 +62,9 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Objects\Asset.vb" />
+    <Compile Include="Objects\User.vb" />
+    <Compile Include="Objects\Release.vb" />
     <Compile Include="UpdaterEx.vb">
       <SubType>Component</SubType>
     </Compile>
