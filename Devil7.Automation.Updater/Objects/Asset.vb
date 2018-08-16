@@ -62,5 +62,9 @@ Namespace Objects
         Public Property Updated As DateTime
         Public Property URL As String
 
+        Public Overrides Function ToString() As String
+            Return FileName
+        End Function
+
     End Class
 End Namespace

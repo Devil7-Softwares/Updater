@@ -82,5 +82,9 @@ Namespace Objects
         <DisplayName("Source Code (zip)")>
         Public Property ZipURL As String
 
+        Public Overrides Function ToString() As String
+            Return Name
+        End Function
+
     End Class
 End Namespace

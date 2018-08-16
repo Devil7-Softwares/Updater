@@ -31,5 +31,9 @@ Namespace Objects
         Public Property Avatar As Image
         Public Property URL As String
 
+        Public Overrides Function ToString() As String
+            Return Name
+        End Function
+
     End Class
 End Namespace
