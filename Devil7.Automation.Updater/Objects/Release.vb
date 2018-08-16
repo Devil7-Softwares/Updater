@@ -35,12 +35,14 @@ Namespace Objects
             Me.Published = Now
             Me.Assets = New List(Of Asset)
             Me.Message = ""
+            Me.TarURL = ""
+            Me.ZipURL = ""
         End Sub
 
         Sub New(ByVal ID As Integer, ByVal URL As String, ByVal TagName As String,
             ByVal Name As String, ByVal Draft As Boolean, ByVal Author As User,
             ByVal PreRelease As Boolean, ByVal Created As DateTime, ByVal Published As DateTime,
-            ByVal Assets As List(Of Asset), ByVal Message As String)
+            ByVal Assets As List(Of Asset), ByVal Message As String, ByVal TarURL As String, ByVal ZipURL As String)
             Me.ID = ID
             Me.URL = URL
             Me.TagName = TagName
@@ -52,6 +54,8 @@ Namespace Objects
             Me.Published = Published
             Me.Assets = Assets
             Me.Message = Message
+            Me.TarURL = TarURL
+            Me.ZipURL = ZipURL
         End Sub
 
         Public Property ID As Integer
@@ -73,6 +77,10 @@ Namespace Objects
         <DisplayName("Assets/Files")>
         Public Property Assets As List(Of Asset)
         Public Property Message As String
+        <DisplayName("Source Code (tar.gz)")>
+        Public Property TarURL As String
+        <DisplayName("Source Code (zip)")>
+        Public Property ZipURL As String
 
     End Class
 End Namespace
