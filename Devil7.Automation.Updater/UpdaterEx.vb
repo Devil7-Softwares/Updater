@@ -21,11 +21,13 @@
 Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Reflection
+Imports System.Threading.Tasks
 
 Public Class UpdaterEx : Inherits Component
 
 #Region "Variables"
     Dim Icon_ As Icon = Nothing
+    Dim BaseURL As String = "https://api.github.com/repos/{0}/{1}"
 #End Region
 
 #Region "Properties"
@@ -44,7 +46,7 @@ Public Class UpdaterEx : Inherits Component
     <Description("Icon or Logo  to display in dialogs invoked from updater.")>
     Property Icon As Icon
         Get
-            If Icon_ Is Nothing Then
+            If Icon_ Is Nothing AndAlso AssociatedAssembly IsNot Nothing Then
                 Return Icon.ExtractAssociatedIcon(AssociatedAssembly.Location)
             Else
                 Return Icon_
@@ -57,6 +59,27 @@ Public Class UpdaterEx : Inherits Component
 
     <Browsable(False)>
     Property AssociatedAssembly As Assembly
+
+    ReadOnly Property ReleaseURL
+        Get
+            Return String.Join("/", String.Format(BaseURL, UserName, RepoName), "releases")
+        End Get
+    End Property
+
+#End Region
+
+#Region "Functions"
+
+    Async Function GetReleases() As Task(Of List(Of Objects.Release))
+        Dim R As New List(Of Objects.Release)
+        Dim Reader As New Classes.URLReader
+        Dim RawJson As String = Await Reader.ReadURL(ReleaseURL)
+        If Not String.IsNullOrWhiteSpace(RawJson) Then
+            R = Classes.JSON.ReadReleasesJson(RawJson)
+        End If
+        Return R
+    End Function
+
 #End Region
 
 End Class
