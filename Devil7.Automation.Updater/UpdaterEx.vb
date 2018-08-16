@@ -23,6 +23,7 @@ Imports System.Drawing
 Imports System.Reflection
 Imports System.Threading.Tasks
 
+<DefaultEvent("StatusChanged")>
 Public Class UpdaterEx : Inherits Component
 
 #Region "Variables"
@@ -66,6 +67,17 @@ Public Class UpdaterEx : Inherits Component
         End Get
     End Property
 
+    <Browsable(False)>
+    Dim Status_ As String
+    Property Status As String
+        Get
+            Return Status_
+        End Get
+        Set(value As String)
+            Status_ = value
+            RaiseEvent StatusChanged(Me, value, 0, False)
+        End Set
+    End Property
 #End Region
 
 #Region "Functions"
@@ -73,12 +85,27 @@ Public Class UpdaterEx : Inherits Component
     Async Function GetReleases() As Task(Of List(Of Objects.Release))
         Dim R As New List(Of Objects.Release)
         Dim Reader As New Classes.URLReader
+        AddHandler Reader.ProgressChanged, AddressOf ProgressChanged
+        Status = "Fetching data from remote..."
         Dim RawJson As String = Await Reader.ReadURL(ReleaseURL)
         If Not String.IsNullOrWhiteSpace(RawJson) Then
+            Status = "Parsing JSON..."
             R = Classes.JSON.ReadReleasesJson(RawJson)
         End If
         Return R
     End Function
+
+#End Region
+
+#Region "Event Handlers"
+    Sub ProgressChanged(ByVal Progress As Integer)
+        RaiseEvent StatusChanged(Me, Status, Progress, True)
+    End Sub
+#End Region
+
+#Region "Events"
+
+    Event StatusChanged(ByVal Sender As Object, ByVal StatusText As String, ByVal Progress As Integer, ByVal UpdateProgress As Boolean)
 
 #End Region
 
