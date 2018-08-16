@@ -28,22 +28,24 @@ Namespace Objects
             Me.URL = ""
             Me.TagName = ""
             Me.Name = ""
+            Me.Draft = False
             Me.Author = Nothing
             Me.PreRelease = False
             Me.Created = Now
             Me.Published = Now
-            Me.Assets = Nothing
+            Me.Assets = New List(Of Asset)
             Me.Message = ""
         End Sub
 
         Sub New(ByVal ID As Integer, ByVal URL As String, ByVal TagName As String,
             ByVal Name As String, ByVal Draft As Boolean, ByVal Author As User,
             ByVal PreRelease As Boolean, ByVal Created As DateTime, ByVal Published As DateTime,
-            ByVal Assets As Asset(), ByVal Message As String)
+            ByVal Assets As List(Of Asset), ByVal Message As String)
             Me.ID = ID
             Me.URL = URL
             Me.TagName = TagName
             Me.Name = Name
+            Me.Draft = Draft
             Me.Author = Author
             Me.PreRelease = PreRelease
             Me.Created = Created
@@ -69,7 +71,7 @@ Namespace Objects
         <DisplayName("Published at")>
         Public Property Published As DateTime
         <DisplayName("Assets/Files")>
-        Public Property Assets As Asset()
+        Public Property Assets As List(Of Asset)
         Public Property Message As String
 
     End Class
