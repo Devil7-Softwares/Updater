@@ -51,6 +51,7 @@ Namespace Classes
             Release.Message = json.SelectToken("body")
             Release.Created = DateTime.Parse(json.SelectToken("created_at"))
             Release.Published = DateTime.Parse(json.SelectToken("published_at"))
+            Release.TagName = json.SelectToken("tag_name")
 
             Dim JAssets As JArray = json.SelectToken("assets").Value(Of JArray)()
             For Each i As JToken In JAssets
