@@ -67,6 +67,12 @@ Public Class UpdaterEx : Inherits Component
         End Get
     End Property
 
+    ReadOnly Property LatestReleaseURL
+        Get
+            Return String.Join("/", String.Format(BaseURL, UserName, RepoName), "releases/latest")
+        End Get
+    End Property
+
     <Browsable(False)>
     Dim Status_ As String
     Property Status As String
@@ -91,6 +97,19 @@ Public Class UpdaterEx : Inherits Component
         If Not String.IsNullOrWhiteSpace(RawJson) Then
             Status = "Parsing JSON..."
             R = Classes.JSON.ReadReleasesJson(RawJson)
+        End If
+        Return R
+    End Function
+
+    Async Function GetLatestRelease() As Task(Of Objects.Release)
+        Dim R As Objects.Release = Nothing
+        Dim Reader As New Classes.URLReader
+        AddHandler Reader.ProgressChanged, AddressOf ProgressChanged
+        Status = "Fetching data from remote..."
+        Dim RawJson As String = Await Reader.ReadURL(LatestReleaseURL)
+        If Not String.IsNullOrWhiteSpace(RawJson) Then
+            Status = "Parsing JSON..."
+            R = Classes.JSON.ReadReleaseJson(RawJson)
         End If
         Return R
     End Function
