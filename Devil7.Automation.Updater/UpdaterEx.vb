@@ -23,6 +23,9 @@ Imports System.Drawing
 Imports System.Reflection
 Imports System.Threading.Tasks
 
+Imports Devil7.Automation.Updater.Classes
+Imports Devil7.Automation.Updater.Objects
+
 <DefaultEvent("StatusChanged")>
 Public Class UpdaterEx : Inherits Component
 
@@ -88,43 +91,67 @@ Public Class UpdaterEx : Inherits Component
 
 #Region "Functions"
 
-    Async Function GetReleases() As Task(Of List(Of Objects.Release))
-        Dim R As New List(Of Objects.Release)
-        Dim Reader As New Classes.URLReader
+    Async Function GetReleases() As Task(Of List(Of Release))
+        Dim R As New List(Of Release)
+        Dim Reader As New URLReader
         AddHandler Reader.ProgressChanged, AddressOf ProgressChanged
         Status = "Fetching data from remote..."
         Dim RawJson As String = Await Reader.ReadURL(ReleaseURL)
         If Not String.IsNullOrWhiteSpace(RawJson) Then
             Status = "Parsing JSON..."
-            R = Classes.JSON.ReadReleasesJson(RawJson)
+            R = JSON.ReadReleasesJson(RawJson)
         End If
         Return R
     End Function
 
-    Async Function GetLatestRelease() As Task(Of Objects.Release)
-        Dim R As Objects.Release = Nothing
-        Dim Reader As New Classes.URLReader
+    Async Function GetLatestRelease() As Task(Of Release)
+        Dim R As Release = Nothing
+        Dim Reader As New URLReader
         AddHandler Reader.ProgressChanged, AddressOf ProgressChanged
         Status = "Fetching data from remote..."
         Dim RawJson As String = Await Reader.ReadURL(LatestReleaseURL)
         If Not String.IsNullOrWhiteSpace(RawJson) Then
             Status = "Parsing JSON..."
-            R = Classes.JSON.ReadReleaseJson(RawJson)
+            R = JSON.ReadReleaseJson(RawJson)
         End If
         Return R
     End Function
 
+    Async Sub CheckForUpdates()
+        Dim Latest As Release = Await GetLatestRelease()
+        Dim arg As New ParseVersionEventArgs(Latest)
+        Dim app_version As Version = Assembly.GetEntryAssembly.GetName.Version
+        Dim status As UpdateStatus = UpdateStatus.UptoDate
+        RaiseEvent ParseVersion(Me, arg)
+
+        If app_version.CompareTo(arg.Version) < 0 Then
+            status = UpdateStatus.UpdateAvailable
+        Else
+            status = UpdateStatus.UptoDate
+        End If
+    End Sub
+
 #End Region
 
 #Region "Event Handlers"
+
     Sub ProgressChanged(ByVal Progress As Integer)
         RaiseEvent StatusChanged(Me, Status, Progress, True)
     End Sub
+
+    Private Sub UpdaterEx_ParseVersion(sender As Object, e As ParseVersionEventArgs) Handles Me.ParseVersion
+        If e.Release IsNot Nothing AndAlso Not String.IsNullOrWhiteSpace(e.Release.TagName) Then
+            Version.TryParse(e.Release.TagName.TrimStart("v"), e.Version)
+        End If
+    End Sub
+
 #End Region
 
 #Region "Events"
 
-    Event StatusChanged(ByVal Sender As Object, ByVal StatusText As String, ByVal Progress As Integer, ByVal UpdateProgress As Boolean)
+    Event StatusChanged(ByVal sender As Object, ByVal StatusText As String, ByVal Progress As Integer, ByVal UpdateProgress As Boolean)
+
+    Event ParseVersion As EventHandler(Of ParseVersionEventArgs)
 
 #End Region
 

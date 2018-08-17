@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ParseVersionEventArgs.vb" />
+    <Compile Include="Classes\UpdateStatus.vb" />
     <Compile Include="Classes\URLReader.vb" />
     <Compile Include="Classes\JSON.vb" />
     <Compile Include="Objects\Asset.vb" />

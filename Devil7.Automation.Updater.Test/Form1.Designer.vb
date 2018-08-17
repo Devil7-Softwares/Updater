@@ -27,9 +27,10 @@ Partial Class Form1
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.lbl_Status = New System.Windows.Forms.ToolStripStatusLabel()
         Me.prog_Status = New System.Windows.Forms.ToolStripProgressBar()
-        Me.UpdaterEx1 = New Devil7.Automation.Updater.UpdaterEx()
         Me.PropertyGrid1 = New System.Windows.Forms.PropertyGrid()
         Me.btn_GetLatestRelease = New System.Windows.Forms.Button()
+        Me.UpdaterEx1 = New Devil7.Automation.Updater.UpdaterEx()
+        Me.btn_CheckForUpdates = New System.Windows.Forms.Button()
         CType(Me.gv_Releases, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -82,14 +83,6 @@ Partial Class Form1
         Me.prog_Status.Name = "prog_Status"
         Me.prog_Status.Size = New System.Drawing.Size(100, 16)
         '
-        'UpdaterEx1
-        '
-        Me.UpdaterEx1.AssociatedAssembly = Nothing
-        Me.UpdaterEx1.Icon = Nothing
-        Me.UpdaterEx1.RepoName = "GSTR_2A-JSON_to_Excel_Converter"
-        Me.UpdaterEx1.Status = Nothing
-        Me.UpdaterEx1.UserName = "Devil7-Softwares"
-        '
         'PropertyGrid1
         '
         Me.PropertyGrid1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -109,11 +102,30 @@ Partial Class Form1
         Me.btn_GetLatestRelease.Text = "Get Latest Release"
         Me.btn_GetLatestRelease.UseVisualStyleBackColor = True
         '
+        'UpdaterEx1
+        '
+        Me.UpdaterEx1.AssociatedAssembly = Nothing
+        Me.UpdaterEx1.Icon = Nothing
+        Me.UpdaterEx1.RepoName = "GSTR_2A-JSON_to_Excel_Converter"
+        Me.UpdaterEx1.Status = Nothing
+        Me.UpdaterEx1.UserName = "Devil7-Softwares"
+        '
+        'btn_CheckForUpdates
+        '
+        Me.btn_CheckForUpdates.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btn_CheckForUpdates.Location = New System.Drawing.Point(236, 342)
+        Me.btn_CheckForUpdates.Name = "btn_CheckForUpdates"
+        Me.btn_CheckForUpdates.Size = New System.Drawing.Size(115, 23)
+        Me.btn_CheckForUpdates.TabIndex = 7
+        Me.btn_CheckForUpdates.Text = "Check for Updates"
+        Me.btn_CheckForUpdates.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(431, 393)
+        Me.Controls.Add(Me.btn_CheckForUpdates)
         Me.Controls.Add(Me.btn_GetLatestRelease)
         Me.Controls.Add(Me.PropertyGrid1)
         Me.Controls.Add(Me.StatusStrip)
@@ -137,4 +149,5 @@ Partial Class Form1
     Friend WithEvents prog_Status As ToolStripProgressBar
     Friend WithEvents PropertyGrid1 As PropertyGrid
     Friend WithEvents btn_GetLatestRelease As Button
+    Friend WithEvents btn_CheckForUpdates As Button
 End Class

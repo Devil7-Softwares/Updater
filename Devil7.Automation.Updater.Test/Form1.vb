@@ -1,4 +1,6 @@
 ﻿Imports Devil7.Automation.Updater
+Imports Devil7.Automation.Updater.Classes
+
 Public Class Form1
 
     Private Async Sub btn_GetAllReleases_Click(sender As Object, e As EventArgs) Handles btn_GetAllReleases.Click
@@ -32,4 +34,9 @@ Public Class Form1
         btn_GetLatestRelease.Enabled = True
         prog_Status.Value = 0
     End Sub
+
+    Private Sub btn_CheckForUpdates_Click(sender As Object, e As EventArgs) Handles btn_CheckForUpdates.Click
+        UpdaterEx1.CheckForUpdates()
+    End Sub
+
 End Class
