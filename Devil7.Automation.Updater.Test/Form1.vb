@@ -15,4 +15,21 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub gv_Releases_SelectionChanged(sender As Object, e As EventArgs) Handles gv_Releases.SelectionChanged
+        If gv_Releases.SelectedRows.Count > 0 Then
+            Dim I As Objects.Release = gv_Releases.SelectedRows(0).DataBoundItem
+            If I IsNot Nothing Then
+                PropertyGrid1.SelectedObject = I
+            End If
+        End If
+    End Sub
+
+    Private Async Sub btn_GetLatestRelease_Click(sender As Object, e As EventArgs) Handles btn_GetLatestRelease.Click
+        btn_GetLatestRelease.Enabled = False
+        Dim Release As Objects.Release = Await UpdaterEx1.GetLatestRelease
+        PropertyGrid1.SelectedObject = Release
+        gv_Releases.DataSource = New List(Of Objects.Release)({Release})
+        btn_GetLatestRelease.Enabled = True
+        prog_Status.Value = 0
+    End Sub
 End Class
