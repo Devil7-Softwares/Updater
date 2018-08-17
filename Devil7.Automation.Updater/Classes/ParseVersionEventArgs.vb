@@ -18,8 +18,6 @@
 '     Dineshkumar T                                                        '
 '=========================================================================='
 
-Imports System.ComponentModel
-
 Namespace Classes
     Public Class ParseVersionEventArgs : Inherits EventArgs
 
